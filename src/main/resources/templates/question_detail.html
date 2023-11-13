@@ -2,8 +2,10 @@
 <head>
     <title>QUESTION-LIST</title>
 </head>
-<div layout:fragment="content" class="h-screen" style="background:#F6F1EE;">
+<div layout:fragment="content" class="h-full" style="background:#F6F1EE;">
     <div class="w-full h-full">
+        <div class="w-full h-24"></div>
+
         <div class="w-3/4 mx-auto py-8 rounded-3xl" style="background:#6C5F5B;">
             <div th:text="${question.subject}" class="text-xl font-bold px-10 pb-5 border-b text-white"></div>
             <div th:text="${question.content}" class="p-10 text-white"></div>
@@ -16,10 +18,16 @@
             <div th:text="${#temporals.format(answer.createDate, 'yyyy-MM-dd HH:mm 작성됨')}" class="pl-10 pt-5 text-xs text-white"></div>
         </div>
 
-        <form th:action="@{|/answer/create/${question.id}|}" method="post"
-        class="w-3/4 mx-auto mt-4 py-5 rounded-3xl flex">
-            <textarea name="content" id="content" rows="5" class="w-full rounded-l-3xl px-5 py-2resize-none"></textarea>
-            <input type="submit" value="답변등록" class="w-1/6 rounded-r-3xl"style="background:#ED7D31;">
+        <form th:action="@{|/answer/create/${question.id}|}" th:object="${answerForm}" method="post"
+        class="w-3/4 mx-auto mt-4 py-5 rounded-3xl">
+            <div class="flex">
+                <textarea th:field="*{content}" rows="5" class="w-full rounded-l-3xl px-5 py-2 resize-none"></textarea>
+                <input type="submit" value="답변등록" class="w-1/6 rounded-r-3xl"style="background:#ED7D31;">
+            </div>
+
+            <div class="w-full mt-5 px-10 text-red-800 bg-red-100 rounded-3xl" role="alert" th:if="${#fields.hasAnyErrors()}">
+                <div th:each="err : ${#fields.allErrors()}" th:text="${err}" />
+            </div>
         </form>
 
     </div>

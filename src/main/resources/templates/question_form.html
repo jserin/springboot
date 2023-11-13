@@ -1,8 +1,32 @@
 <html layout:decorate="~{layout}">
 <head>
-  <title>QUESTION-LIST</title>
+  <title>QUESTION-FORM</title>
 </head>
 <div layout:fragment="content" class="h-screen" style="background:#F6F1EE;">
+  <div class="w-full h-full">
+    <div class="w-full h-24"></div>
 
+    <div class="w-3/4 mx-auto py-8 rounded-3xl" style="background:#6C5F5B;">
+      <div class="text-xl font-bold px-10 pb-5 border-b text-white">질문등록</div>
+
+      <form th:action="@{/question/create}" th:object="${questionForm}" method="post">
+        <div class="my-5 w-11/12 mx-auto px-5 text-red-800 bg-red-100 rounded-xl" role="alert" th:if="${#fields.hasAnyErrors()}">
+          <div th:each="err : ${#fields.allErrors()}" th:text="${err}" />
+        </div>
+
+        <div class="my-5 text-center">
+          <input type="text" name="subject" id="subject" class="w-11/12 h-12 rounded-xl px-5" placeholder="제목" th:field="*{subject}">
+        </div>
+
+        <div class="my-5 text-center">
+          <textarea name="content" id="content" class="w-11/12 rounded-xl p-5 resize-none" rows="20" placeholder="내용" th:field="*{content}"></textarea>
+        </div>
+
+        <div class="w-11/12 text-left mx-auto">
+          <input type="submit" value="저장하기" class="w-24 py-3 text-white rounded-xl" style="background:#ED7D31;">
+        </div>
+      </form>
+    </div>
+  </div>
 </div>
 </html>

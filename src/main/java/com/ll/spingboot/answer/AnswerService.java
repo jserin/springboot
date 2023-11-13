@@ -12,12 +12,14 @@ public class AnswerService {
 
     private final AnswerRepository answerRepository;
 
+    public Answer create(Question question, String content) {
+        Answer a = Answer.builder()
+                .question(question)
+                .content(content)
+                .createDate(LocalDateTime.now())
+                .build();
+        this.answerRepository.save(a);
 
-    public void create(Question question, String content) {
-        Answer answer = new Answer();
-        answer.setContent(content);
-        answer.setCreateDate(LocalDateTime.now());
-        answer.setQuestion(question);
-        this.answerRepository.save(answer);
+        return a;
     }
 }

@@ -4,6 +4,7 @@
 </head>
 <div layout:fragment="content" class="h-screen" style="background:#F6F1EE;">
     <div class="w-full">
+        <div class="w-full h-24"></div>
         <table class="w-3/4 mx-auto">
             <thead class=" border-b-2 border-gray-400">
             <tr class="h-12" style="background:#ED7D31;">
@@ -13,16 +14,45 @@
             </tr>
             </thead>
             <tbody>
-            <tr th:each="question, loop : ${questionList}" class="h-9 border-b border-gray-300">
-                <td th:text="${loop.count}" class="text-center"></td>
+            <tr th:each="question, loop : ${paging}" class="h-9 border-b border-gray-300">
+                <td th:text="${paging.getTotalElements - (paging.number * paging.size) - loop.index}"></td>
                 <td class="pl-5">
                     <a th:href="@{|/question/detail/${question.id}|}" th:text="${question.subject}"></a>
+                    <span class="text-sm ml-2" style="color:#4F4A45;"
+                          th:if="${#lists.size(question.answerList) > 0}"
+                          th:text="|(${#lists.size(question.answerList)})|">
+                    </span>
                 </td>
                 <td th:text="${#temporals.format(question.createDate, 'yyyy-MM-dd HH:mm')}" class="pl-5"></td>
             </tr>
             </tbody>
         </table>
-        <div class="w-3/4 my-7 mx-auto">
+
+        <!-- 페이징처리 시작 -->
+        <div class="h-24 text-center">
+            <div th:if="${!paging.isEmpty()}" class="join mt-8 mx-auto">
+                <div class="join-item btn btn-sm" th:classappend="${!paging.hasPrevious} ? 'btn-disabled'">
+                    <a class="h-full flex" th:href="@{|?page=${paging.number-1}|}">
+                        <span class="m-auto">이전</span>
+                    </a>
+                </div>
+                <div th:each="page: ${#numbers.sequence(0, paging.totalPages-1)}"
+                     th:if="${page >= paging.number-5 and page <= paging.number+5}"
+                     th:classappend="${page == paging.number} ? 'btn-active'" class="join-item btn btn-sm">
+                    <a th:href="@{|?page=${page}|}" class="h-full flex">
+                        <span th:text="${page+1}" class="my-auto"></span>
+                    </a>
+                </div>
+                <div class="join-item btn btn-sm" th:classappend="${!paging.hasNext} ? 'btn-disabled'">
+                    <a class=" h-full flex" th:href="@{|?page=${paging.number+1}|}">
+                        <span class="my-auto">다음</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <!-- 페이징처리 끝 -->
+
+        <div class="w-3/4 mx-auto mt-3">
             <a th:href="@{/question/create}" class="w-24 py-3 px-5 text-white" style="background:#6C5F5B;">질문 등록</a>
         </div>
     </div>
