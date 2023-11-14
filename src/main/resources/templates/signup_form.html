@@ -1,0 +1,38 @@
+<html layout:decorate="~{layout}">
+<head>
+  <title>SIGNUP</title>
+</head>
+<div layout:fragment="content" class="h-screen" style="background:#F6F1EE;">
+  <div class="w-full h-full">
+    <div class="w-full h-24"></div>
+    <div class="w-3/4 mx-auto py-8 rounded-3xl text-center" style="background:#6C5F5B;">
+      <div class="text-xl font-bold pb-5 border-b text-white mx-auto">SIGNUP</div>
+
+      <form th:action="@{/user/signup}" th:object="${userCreateForm}" method="post">
+        <div class="my-5 w-11/12 mx-auto px-5 text-red-800 bg-red-100 rounded-xl" role="alert" th:if="${#fields.hasAnyErrors()}">
+          <div th:each="err : ${#fields.allErrors()}" th:text="${err}" />
+        </div>
+
+        <div class="mt-5 mx-auto flex w-4/5">
+          <label for="username" class="text-white w-36">사용자ID</label>
+          <input type="text" th:field="*{username}" class="w-full rounded-full px-5">
+        </div>
+        <div class="mt-5 mx-auto flex w-4/5">
+          <label for="password1" class="text-white w-36">비밀번호</label>
+          <input type="password" th:field="*{password1}" class="w-full rounded-full px-5">
+        </div>
+        <div class="mt-5 mx-auto flex w-4/5">
+          <label for="password2" class="text-white w-36">비밀번호 확인</label>
+          <input type="password" th:field="*{password2}" class="w-full rounded-full px-5">
+        </div>
+        <div class="mt-5 mx-auto flex w-4/5">
+          <label for="email" class="text-white w-36">이메일</label>
+          <input type="email" th:field="*{email}" class="w-full rounded-full px-5">
+        </div>
+        <button type="submit" class="mt-5 btn text-white">회원가입</button>
+      </form>
+
+    </div>
+  </div>
+</div>
+</html>
