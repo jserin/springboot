@@ -1,6 +1,7 @@
 package com.ll.spingboot.answer;
 
 import com.ll.spingboot.question.Question;
+import com.ll.spingboot.user.SiteUser;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -29,4 +30,7 @@ public class Answer {
 
     @ManyToOne
     private Question question;
+
+    @ManyToOne
+    private SiteUser author;
 }

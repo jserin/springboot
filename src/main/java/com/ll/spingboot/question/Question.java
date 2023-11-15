@@ -1,6 +1,7 @@
 package com.ll.spingboot.question;
 
 import com.ll.spingboot.answer.Answer;
+import com.ll.spingboot.user.SiteUser;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -31,4 +32,7 @@ public class Question {
 
     @OneToMany(mappedBy = "question", cascade = CascadeType.REMOVE)
     private List<Answer> answerList;
+
+    @ManyToOne
+    private SiteUser author;
 }

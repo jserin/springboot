@@ -1,6 +1,7 @@
 package com.ll.spingboot.question;
 
 import com.ll.spingboot.DataNotFoundException;
+import com.ll.spingboot.user.SiteUser;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -32,11 +33,12 @@ public class QuestionService {
         }
     }
 
-    public Question create(String subject, String content) {
+    public Question create(String subject, String content, SiteUser user) {
         Question q = Question.builder()
                 .subject(subject)
                 .content(content)
                 .createDate(LocalDateTime.now())
+                .author(user)
                 .build();
         this.questionRepository.save(q);
 

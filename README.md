@@ -1,5 +1,7 @@
 ## 23-11-15
 - 회원가입, 로그인, 로그아웃 구현
+- question, answer author 엔티티 추가
+- 로그인한 사용자만 글, 댓글 작성 가능 @PreAuthorize("isAuthenticated()")
 
 ## 23-11-14
 - DaisyUI 적용 및 템플릿 작업
