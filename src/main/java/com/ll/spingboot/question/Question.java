@@ -11,6 +11,7 @@ import lombok.experimental.SuperBuilder;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Set;
 
 @Getter
 @SuperBuilder(toBuilder = true)
@@ -30,9 +31,14 @@ public class Question {
 
     private LocalDateTime createDate;
 
+    private LocalDateTime modifyDate;
+
     @OneToMany(mappedBy = "question", cascade = CascadeType.REMOVE)
     private List<Answer> answerList;
 
     @ManyToOne
     private SiteUser author;
+
+    @ManyToMany
+    Set<SiteUser> voter;
 }

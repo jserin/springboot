@@ -1,11 +1,13 @@
 package com.ll.spingboot.answer;
 
+import com.ll.spingboot.DataNotFoundException;
 import com.ll.spingboot.question.Question;
 import com.ll.spingboot.user.SiteUser;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 @RequiredArgsConstructor
 @Service
@@ -23,5 +25,26 @@ public class AnswerService {
         this.answerRepository.save(a);
 
         return a;
+    }
+
+    public Answer getAnswer(Integer id) {
+        Optional<Answer> answer = this.answerRepository.findById(id);
+        if (answer.isPresent()) {
+            return answer.get();
+        } else {
+            throw new DataNotFoundException("answer not found");
+        }
+    }
+
+    public void modify(Answer answer, String content) {
+        answer = answer.toBuilder()
+                .content(content)
+                .modifyDate(LocalDateTime.now())
+                .build();
+        this.answerRepository.save(answer);
+    }
+
+    public void delete(Answer answer) {
+        this.answerRepository.delete(answer);
     }
 }

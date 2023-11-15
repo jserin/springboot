@@ -2,16 +2,29 @@
 <head>
     <title>QUESTION-LIST</title>
 </head>
-<div layout:fragment="content" class="h-full" style="background:#F6F1EE;">
+<div layout:fragment="content" class="min-h-screen" style="background:#F6F1EE;">
     <div class="w-full h-full">
         <div class="w-full h-24"></div>
 
         <div class="w-3/4 mx-auto py-8 rounded-3xl" style="background:#6C5F5B;">
             <div class="border-b">
                 <div th:text="${question.subject}" class="text-xl font-bold px-10 pb-5 text-white"></div>
-                <div class="text-gray-200 px-10 text-xs pb-3 flex">
-                    <div th:if="${question.author != null}" th:text="|글쓴이 : ${question.author.username}|" class="mr-10"></div>
-                    <div th:text="${#temporals.format(question.createDate, 'yyyy-MM-dd HH:mm')}"></div>
+
+                <div class="flex justify-between">
+                    <div class="text-gray-200 px-10 text-xs pb-3 flex">
+                        <div th:if="${question.author != null}" th:text="|글쓴이 : ${question.author.username}|" class="mr-10"></div>
+                        <div th:if="${question.modifyDate == null}" th:text="${#temporals.format(question.createDate, 'yyyy-MM-dd HH:mm')}"></div>
+                        <div th:if="${question.modifyDate != null}" th:text="${#temporals.format(question.modifyDate, 'yyyy-MM-dd HH:mm (수정됨)')}"></div>
+                    </div>
+
+                    <div class="text-gray-200 px-10 text-xs pb-3 flex">
+                        <a th:href="@{|/question/modify/${question.id}|}" sec:authorize="isAuthenticated()"
+                           th:if="${question.author != null and #authentication.getPrincipal().getUsername() == question.author.username}"
+                           th:text="수정"></a>
+                        <a href="javascript:void(0);" th:data-uri="@{|/question/delete/${question.id}|}" sec:authorize="isAuthenticated()"
+                           th:if="${question.author != null and #authentication.getPrincipal().getUsername() == question.author.username}"
+                           th:text="삭제" class="delete ml-5"></a>
+                    </div>
                 </div>
             </div>
             <div th:text="${question.content}" class="p-10 text-white"></div>
@@ -21,10 +34,23 @@
 
         <div th:each="answer : ${question.answerList}"
              class="w-3/4 mx-auto mt-4 py-5 rounded-3xl" style="background:#6C5F5B;">
-            <div class="border-b text-gray-200 px-10 text-xs pb-3 flex">
-                <div th:if="${answer.author != null}" th:text="|작성자 : ${answer.author.username}|" class="mr-10"></div>
-                <div th:text="${#temporals.format(answer.createDate, 'yyyy-MM-dd HH:mm')}"></div>
+
+            <div class="flex justify-between border-b">
+                <div class="text-gray-200 px-10 text-xs pb-3 flex">
+                    <div th:if="${answer.author != null}" th:text="|작성자 : ${answer.author.username}|" class="mr-10"></div>
+                    <div th:if="${answer.modifyDate == null}" th:text="${#temporals.format(answer.createDate, 'yyyy-MM-dd HH:mm')}"></div>
+                    <div th:if="${answer.modifyDate != null}" th:text="${#temporals.format(answer.modifyDate, 'yyyy-MM-dd HH:mm (수정됨)')}"></div>
+                </div>
+                <div class="text-gray-200 px-10 text-xs pb-3 flex">
+                    <a th:href="@{|/answer/modify/${answer.id}|}" sec:authorize="isAuthenticated()"
+                       th:if="${answer.author != null and #authentication.getPrincipal().getUsername() == answer.author.username}"
+                       th:text="수정"></a>
+                    <a href="javascript:void(0);" th:data-uri="@{|/question/delete/${question.id}|}" sec:authorize="isAuthenticated()"
+                       th:if="${question.author != null and #authentication.getPrincipal().getUsername() == question.author.username}"
+                       th:text="삭제" class="delete ml-5"></a>
+                </div>
             </div>
+
             <div th:text="${answer.content}" class="pl-10 py-5 text-white"></div>
         </div>
 
@@ -39,9 +65,21 @@
             <div class="w-full mt-5 px-10 text-red-800 bg-red-100 rounded-3xl" role="alert" th:if="${#fields.hasAnyErrors()}">
                 <div th:each="err : ${#fields.allErrors()}" th:text="${err}" />
             </div>
+
         </form>
 
     </div>
 
 </div>
+
+<script layout:fragment="script" type='text/javascript'>
+const delete_elements = document.getElementsByClassName("delete");
+Array.from(delete_elements).forEach(function(element) {
+    element.addEventListener('click', function() {
+        if(confirm("정말로 삭제하시겠습니까?")) {
+            location.href = this.dataset.uri;
+        };
+    });
+});
+</script>
 </html>
