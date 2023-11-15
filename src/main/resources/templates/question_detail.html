@@ -7,15 +7,25 @@
         <div class="w-full h-24"></div>
 
         <div class="w-3/4 mx-auto py-8 rounded-3xl" style="background:#6C5F5B;">
-            <div th:text="${question.subject}" class="text-xl font-bold px-10 pb-5 border-b text-white"></div>
+            <div class="border-b">
+                <div th:text="${question.subject}" class="text-xl font-bold px-10 pb-5 text-white"></div>
+                <div class="text-gray-200 px-10 text-xs pb-3 flex">
+                    <div th:if="${question.author != null}" th:text="|글쓴이 : ${question.author.username}|" class="mr-10"></div>
+                    <div th:text="${#temporals.format(question.createDate, 'yyyy-MM-dd HH:mm')}"></div>
+                </div>
+            </div>
             <div th:text="${question.content}" class="p-10 text-white"></div>
-            <div th:text="${#temporals.format(question.createDate, 'yyyy-MM-dd HH:mm 작성됨')}" class="pl-10 text-xs text-white"></div>
         </div>
+
         <div th:text="|${#lists.size(question.answerList)}개의 답변|" class="w-3/4 mx-auto mt-4 px-10 font-bold"></div>
+
         <div th:each="answer : ${question.answerList}"
-             class="w-3/4 mx-auto mt-4 py-8 rounded-3xl" style="background:#6C5F5B;">
-            <div th:text="${answer.content}" class="pl-10 text-white"></div>
-            <div th:text="${#temporals.format(answer.createDate, 'yyyy-MM-dd HH:mm 작성됨')}" class="pl-10 pt-5 text-xs text-white"></div>
+             class="w-3/4 mx-auto mt-4 py-5 rounded-3xl" style="background:#6C5F5B;">
+            <div class="border-b text-gray-200 px-10 text-xs pb-3 flex">
+                <div th:if="${answer.author != null}" th:text="|작성자 : ${answer.author.username}|" class="mr-10"></div>
+                <div th:text="${#temporals.format(answer.createDate, 'yyyy-MM-dd HH:mm')}"></div>
+            </div>
+            <div th:text="${answer.content}" class="pl-10 py-5 text-white"></div>
         </div>
 
         <form th:action="@{|/answer/create/${question.id}|}" th:object="${answerForm}" method="post"
