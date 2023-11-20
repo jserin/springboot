@@ -6,7 +6,7 @@
     <div class="w-full h-full">
         <div class="w-full h-24"></div>
 
-        <div class="w-3/4 mx-auto py-8 rounded-3xl" style="background:#6C5F5B;">
+        <div class="w-3/5 mx-auto py-8 rounded-3xl" style="background:#6C5F5B;">
             <div class="border-b">
                 <div th:text="${question.subject}" class="text-xl font-bold px-10 pb-5 text-white"></div>
 
@@ -28,12 +28,18 @@
                 </div>
             </div>
             <div th:text="${question.content}" class="p-10 text-white"></div>
+            <div class="text-center">
+                <button href="javascript:void(0);" class="recommend btn" th:data-uri="@{|/question/vote/${question.id}|}">
+                    추천
+                    <div class="badge badge-neutral" th:text="${#lists.size(question.voter)}"></div>
+                </button>
+            </div>
         </div>
 
-        <div th:text="|${#lists.size(question.answerList)}개의 답변|" class="w-3/4 mx-auto mt-4 px-10 font-bold"></div>
+        <div th:text="|${#lists.size(question.answerList)}개의 답변|" class="w-3/5 mx-auto mt-4 px-10 font-bold"></div>
 
         <div th:each="answer : ${question.answerList}"
-             class="w-3/4 mx-auto mt-4 py-5 rounded-3xl" style="background:#6C5F5B;">
+             class="w-3/5 mx-auto mt-4 py-5 rounded-3xl" style="background:#6C5F5B;">
 
             <div class="flex justify-between border-b">
                 <div class="text-gray-200 px-10 text-xs pb-3 flex">
@@ -51,11 +57,19 @@
                 </div>
             </div>
 
-            <div th:text="${answer.content}" class="pl-10 py-5 text-white"></div>
+            <div class="flex px-10 justify-between">
+                <div th:text="${answer.content}" class="py-5 text-white max-w-4xl"></div>
+                <div class="py-5">
+                    <button href="javascript:void(0);" class="recommend btn btn-xs" th:data-uri="@{|/answer/vote/${answer.id}|}">
+                        추천
+                        <div class="badge badge-neutral" th:text="${#lists.size(answer.voter)}"></div>
+                    </button>
+                </div>
+            </div>
         </div>
 
         <form th:action="@{|/answer/create/${question.id}|}" th:object="${answerForm}" method="post"
-        class="w-3/4 mx-auto mt-4 py-5 rounded-3xl">
+        class="w-3/5 mx-auto mt-4 py-5 rounded-3xl">
             <div class="flex">
                 <textarea sec:authorize="isAnonymous()" disabled th:field="*{content}" rows="5" class="w-full rounded-l-3xl px-5 py-2 resize-none border"></textarea>
                 <textarea sec:authorize="isAuthenticated()" th:field="*{content}" rows="5" class="w-full rounded-l-3xl px-5 py-2 resize-none"></textarea>
@@ -77,6 +91,15 @@ const delete_elements = document.getElementsByClassName("delete");
 Array.from(delete_elements).forEach(function(element) {
     element.addEventListener('click', function() {
         if(confirm("정말로 삭제하시겠습니까?")) {
+            location.href = this.dataset.uri;
+        };
+    });
+});
+
+const recommend_elements = document.getElementsByClassName("recommend");
+Array.from(recommend_elements).forEach(function(element) {
+    element.addEventListener('click', function() {
+        if(confirm("정말로 추천하시겠습니까?")) {
             location.href = this.dataset.uri;
         };
     });
