@@ -27,7 +27,8 @@
                     </div>
                 </div>
             </div>
-            <div th:text="${question.content}" class="p-10 text-white"></div>
+
+            <div th:utext="${@commonUtil.markdown(question.content)}" class="p-10 text-white"></div>
             <div class="text-center">
                 <button href="javascript:void(0);" class="recommend btn" th:data-uri="@{|/question/vote/${question.id}|}">
                     추천
@@ -59,7 +60,7 @@
             </div>
 
             <div class="flex px-10 justify-between">
-                <div th:text="${answer.content}" class="py-5 text-white max-w-4xl"></div>
+                <div th:utext="${@commonUtil.markdown(answer.content)}" class="py-5 text-white max-w-4xl"></div>
                 <div class="py-5">
                     <button href="javascript:void(0);" class="recommend btn btn-xs" th:data-uri="@{|/answer/vote/${answer.id}|}">
                         추천
