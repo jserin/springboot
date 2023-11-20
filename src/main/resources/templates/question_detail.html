@@ -40,6 +40,7 @@
 
         <div th:each="answer : ${question.answerList}"
              class="w-3/5 mx-auto mt-4 py-5 rounded-3xl" style="background:#6C5F5B;">
+            <a th:id="|answer_${answer.id}|"></a>
 
             <div class="flex justify-between border-b">
                 <div class="text-gray-200 px-10 text-xs pb-3 flex">
