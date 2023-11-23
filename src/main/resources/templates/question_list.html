@@ -34,19 +34,19 @@
         <div class="h-24 text-center">
             <div th:if="${!paging.isEmpty()}" class="join mt-8 mx-auto">
                 <div class="join-item btn btn-sm" th:classappend="${!paging.hasPrevious} ? 'btn-disabled'">
-                    <a class="h-full flex" th:href="@{|?page=${paging.number-1}|}">
+                    <a class="page-link h-full flex" href="javascript:void(0)" th:data-page="${paging.number-1}">
                         <span class="m-auto">이전</span>
                     </a>
                 </div>
                 <div th:each="page: ${#numbers.sequence(0, paging.totalPages-1)}"
                      th:if="${page >= paging.number-5 and page <= paging.number+5}"
                      th:classappend="${page == paging.number} ? 'btn-active'" class="join-item btn btn-sm">
-                    <a th:href="@{|?page=${page}|}" class="h-full flex">
+                    <a href="javascript:void(0)" th:data-page="${page}" class="page-link h-full flex">
                         <span th:text="${page+1}" class="my-auto"></span>
                     </a>
                 </div>
                 <div class="join-item btn btn-sm" th:classappend="${!paging.hasNext} ? 'btn-disabled'">
-                    <a class=" h-full flex" th:href="@{|?page=${paging.number+1}|}">
+                    <a class="page-link h-full flex" href="javascript:void(0)" th:data-page="${paging.number+1}">
                         <span class="my-auto">다음</span>
                     </a>
                 </div>
@@ -58,5 +58,24 @@
             <a th:href="@{/question/create}" class="w-24 py-3 px-5 text-white" style="background:#6C5F5B;">질문 등록</a>
         </div>
     </div>
+    <form th:action="@{/question/list}" method="get" id="searchForm">
+        <input type="hidden" id="kw" name="kw" th:value="${kw}">
+        <input type="hidden" id="page" name="page" th:value="${paging.number}">
+    </form>
 </div>
+<script layout:fragment="script" type='text/javascript'>
+const page_elements = document.getElementsByClassName("page-link");
+Array.from(page_elements).forEach(function(element) {
+    element.addEventListener('click', function() {
+        document.getElementById('page').value = this.dataset.page;
+        document.getElementById('searchForm').submit();
+    });
+});
+const btn_search = document.getElementById("btn_search");
+btn_search.addEventListener('click', function() {
+    document.getElementById('kw').value = document.getElementById('search_kw').value;
+    document.getElementById('page').value = 0;  // 검색버튼을 클릭할 경우 0페이지부터 조회한다.
+    document.getElementById('searchForm').submit();
+});
+</script>
 </html>

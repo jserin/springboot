@@ -3,9 +3,14 @@
         <a class="btn btn-ghost text-xl" href="/">JSERIN</a>
     </div>
     <div class="flex-none gap-2">
-        <div class="form-control">
-            <input type="text" placeholder="Search" class="input input-bordered w-24 md:w-auto" />
+
+        <div class="input input-bordered w-28 md:w-auto">
+            <input type="text" id="search_kw" placeholder="Search" th:value="${kw}"/>
+            <button class="h-full" type="button" id="btn_search">
+                찾기
+            </button>
         </div>
+
         <div class="dropdown dropdown-end">
             <label tabindex="0" class="btn btn-ghost btn-circle avatar">
                 <div class="w-10 rounded-full" style="background:#6C5F5B;">
