@@ -1,4 +1,4 @@
-package com.ll.spingboot.question;
+package com.ll.springboot.question;
 
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;

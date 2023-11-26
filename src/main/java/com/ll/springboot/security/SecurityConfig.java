@@ -1,4 +1,4 @@
-package com.ll.spingboot.security;
+package com.ll.springboot.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

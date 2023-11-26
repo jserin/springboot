@@ -1,8 +1,8 @@
-package com.ll.spingboot.security;
+package com.ll.springboot.security;
 
-import com.ll.spingboot.user.SiteUser;
-import com.ll.spingboot.user.UserRepository;
-import com.ll.spingboot.user.UserRole;
+import com.ll.springboot.user.SiteUser;
+import com.ll.springboot.user.UserRepository;
+import com.ll.springboot.user.UserRole;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

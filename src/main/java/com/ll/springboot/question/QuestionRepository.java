@@ -1,9 +1,7 @@
-package com.ll.spingboot.question;
+package com.ll.springboot.question;
 
-import com.ll.spingboot.question.Question;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

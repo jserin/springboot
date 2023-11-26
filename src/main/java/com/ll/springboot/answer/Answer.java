@@ -1,12 +1,11 @@
-package com.ll.spingboot.answer;
+package com.ll.springboot.answer;
 
-import com.ll.spingboot.question.Question;
-import com.ll.spingboot.user.SiteUser;
+import com.ll.springboot.question.Question;
+import com.ll.springboot.user.SiteUser;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 import org.springframework.data.annotation.CreatedDate;
 

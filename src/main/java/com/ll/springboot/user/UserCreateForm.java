@@ -1,4 +1,4 @@
-package com.ll.spingboot.user;
+package com.ll.springboot.user;
 
 import jakarta.validation.constraints.Size;
 import jakarta.validation.constraints.Email;

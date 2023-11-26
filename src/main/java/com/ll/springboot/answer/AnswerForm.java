@@ -1,4 +1,4 @@
-package com.ll.spingboot.answer;
+package com.ll.springboot.answer;
 
 import jakarta.validation.constraints.NotEmpty;
 import lombok.Getter;

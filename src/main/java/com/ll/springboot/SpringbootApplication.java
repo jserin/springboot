@@ -1,13 +1,13 @@
-package com.ll.spingboot;
+package com.ll.springboot;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class SpingbootApplication {
+public class SpringbootApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(SpingbootApplication.class, args);
+		SpringApplication.run(SpringbootApplication.class, args);
 	}
 
 }

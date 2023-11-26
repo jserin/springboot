@@ -1,4 +1,4 @@
-package com.ll.spingboot.user;
+package com.ll.springboot.user;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

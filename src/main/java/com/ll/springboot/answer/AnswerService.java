@@ -1,8 +1,8 @@
-package com.ll.spingboot.answer;
+package com.ll.springboot.answer;
 
-import com.ll.spingboot.DataNotFoundException;
-import com.ll.spingboot.question.Question;
-import com.ll.spingboot.user.SiteUser;
+import com.ll.springboot.DataNotFoundException;
+import com.ll.springboot.question.Question;
+import com.ll.springboot.user.SiteUser;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

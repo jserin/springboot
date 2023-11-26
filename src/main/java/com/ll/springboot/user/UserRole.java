@@ -1,4 +1,4 @@
-package com.ll.spingboot.user;
+package com.ll.springboot.user;
 
 import lombok.Getter;
 

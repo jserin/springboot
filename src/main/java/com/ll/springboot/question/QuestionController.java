@@ -1,8 +1,8 @@
-package com.ll.spingboot.question;
+package com.ll.springboot.question;
 
-import com.ll.spingboot.answer.AnswerForm;
-import com.ll.spingboot.user.SiteUser;
-import com.ll.spingboot.user.UserService;
+import com.ll.springboot.answer.AnswerForm;
+import com.ll.springboot.user.SiteUser;
+import com.ll.springboot.user.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;

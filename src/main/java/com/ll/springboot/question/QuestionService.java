@@ -1,15 +1,12 @@
-package com.ll.spingboot.question;
+package com.ll.springboot.question;
 
-import com.ll.spingboot.DataNotFoundException;
-import com.ll.spingboot.answer.Answer;
-import com.ll.spingboot.user.SiteUser;
-import jakarta.persistence.criteria.*;
+import com.ll.springboot.DataNotFoundException;
+import com.ll.springboot.user.SiteUser;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;

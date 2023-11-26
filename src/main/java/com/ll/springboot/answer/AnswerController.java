@@ -1,9 +1,9 @@
-package com.ll.spingboot.answer;
+package com.ll.springboot.answer;
 
-import com.ll.spingboot.question.Question;
-import com.ll.spingboot.question.QuestionService;
-import com.ll.spingboot.user.SiteUser;
-import com.ll.spingboot.user.UserService;
+import com.ll.springboot.question.Question;
+import com.ll.springboot.question.QuestionService;
+import com.ll.springboot.user.SiteUser;
+import com.ll.springboot.user.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

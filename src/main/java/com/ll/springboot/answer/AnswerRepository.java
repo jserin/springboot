@@ -1,6 +1,5 @@
-package com.ll.spingboot.answer;
+package com.ll.springboot.answer;
 
-import com.ll.spingboot.answer.Answer;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface AnswerRepository extends JpaRepository<Answer, Integer> {
